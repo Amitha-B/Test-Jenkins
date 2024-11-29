@@ -1,0 +1,23 @@
+# Use the official Python image
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the application code to the working directory
+COPY . .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the application's port
+EXPOSE 3000
+
+# Command to run the application
+CMD ["python", "blue_app.py"]
+
+
+# build and push image to GCR(google container Registry)
+
+docker build -t gcr.io/<my-project-id>/blue-app:v1 ./blue-app
+docker push gcr.io/<my-project-id>/blue-app:v1
